@@ -1,15 +1,9 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
 pub fn loop_func(){
-    let mut loop_count: u8 = 0;
-    loop{
-        loop_count += 1;
-        println!("Nain(s) paré(s): {}", loop_count);
-        if loop_count >= 10 {
-            break;
-        }
+    for i in 0..10 {
+        println!("Nain(s) paré(s) {}", i + 1);
     }
-    println!("Nains prêts");
 }
 
 pub fn crit_check(){

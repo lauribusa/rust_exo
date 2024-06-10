@@ -1,4 +1,3 @@
-use std::env::args;
 const MATH_PI: f64 = 3.14159265359;
 /*
 var, fn: snake_case
@@ -16,18 +15,18 @@ fn main() {
     math_addition();
 }
 
-pub fn print_my_stuff() {
+fn print_my_stuff() {
     let a_number: i64 = 32;
     println!("Printing a i64 number: {a_number}");
 }
 
-pub fn mutable_variable() {
+fn mutable_variable() {
     let mut mutable = 20;
     mutable = 10;
     println!("Variable used to be 20, now: {mutable}");
 }
 
-pub fn shadowing_variable() {
+fn shadowing_variable() {
     let mut mutable: i32 = 20;
     mutable = 10;
 
@@ -35,7 +34,7 @@ pub fn shadowing_variable() {
     println!("Variable used to be i32 with value of 20, now: {mutable}");
 }
 
-pub fn math_addition() {
+fn math_addition() {
     // cargo run X Y
     let num1 = std::env::args().nth(1).unwrap().parse::<i32>().unwrap();
 

@@ -4,4 +4,5 @@ mod r#loop;
 fn main() {
     random_number::roll_dice();
     r#loop::loop_func();
+    r#loop::fail_check();
 }

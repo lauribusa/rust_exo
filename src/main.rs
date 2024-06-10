@@ -8,7 +8,7 @@ everything else: CamelCase
 fn main() {
     let number = 1;
     println!("Printing implicit variable in main: {number}");
-    println!("PI vaut {MATH_PI}");
+    println!("PI equals to {MATH_PI}");
     print_my_stuff();
     mutable_variable();
     shadowing_variable();
@@ -32,6 +32,7 @@ fn shadowing_variable() {
 
     let mutable: bool = true;
     println!("Variable used to be i32 with value of 20, now: {mutable}");
+    // prints "true"
 }
 
 fn math_addition() {

@@ -13,6 +13,12 @@ fn main() {
     mutable_variable();
     shadowing_variable();
     math_addition();
+    argument_func(&88);
+    let score = argument_func_return_value(&200);
+    println!("Returned result is: {score}");
+    let result = add(4, 6);
+    println!("Returned argument function with sum value of: {result}");
+
 }
 
 fn print_my_stuff() {
@@ -43,4 +49,22 @@ fn math_addition() {
 
     let added = num1 + num2;
     println!("printed with arguments in CLI: {added}");
+}
+
+fn argument_func(number: &i32){
+    println!("Here's a number: {}", number);
+}
+
+fn argument_func_return_value(score: &i32) -> &str{
+    let over_threshold = "Profound retardation";
+    let under_threshold = "Very autistic";
+    if score > &160  {
+        return over_threshold;
+    }
+    under_threshold
+}
+
+fn add(operand1: i32, operand2: i32) -> i32{
+    let sum = operand1 + operand2;
+    sum
 }

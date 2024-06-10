@@ -1,8 +1,4 @@
-fn main() {
-    math_addition();
-}
-
-fn math_addition() {
+pub fn math_addition() {
     // cargo run X Y
     let num1 = std::env::args().nth(1).unwrap().parse::<i32>().unwrap();
 

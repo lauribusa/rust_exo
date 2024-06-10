@@ -1,8 +1,15 @@
 use std::env::args;
+const MATH_PI: f64 = 3.14159265359;
+/*
+var, fn: snake_case
+const: PASCAL_CASE
+everything else: CamelCase
+ */
 
 fn main() {
     let number = 1;
     println!("Printing implicit variable in main: {number}");
+    println!("PI vaut {MATH_PI}");
     print_my_stuff();
     mutable_variable();
     shadowing_variable();

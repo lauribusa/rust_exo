@@ -1,7 +1,7 @@
 mod random_number;
-mod iq;
+mod r#loop;
 
 fn main() {
-    iq::iq_check();
     random_number::roll_dice();
+    r#loop::loop_func();
 }

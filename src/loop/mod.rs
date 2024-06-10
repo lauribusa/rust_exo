@@ -12,12 +12,14 @@ pub fn loop_func(){
     println!("Nains prêts");
 }
 
-pub fn fail_check(){
+pub fn crit_check(){
     let mut loop_count: u8 = 0;
     let success: bool = loop{
         loop_count += 1;
         let result: u32 = rand();
+        println!("Rolling... {result}");
         if result >= 18 {
+            println!("Crit! {result}");
             break true;
         }
         if loop_count >= 10 {
@@ -35,5 +37,5 @@ fn rand() -> u32 {
     let nanos = since_epoch.as_nanos();
 	
     (nanos % 21) as u32
-	
+
 }

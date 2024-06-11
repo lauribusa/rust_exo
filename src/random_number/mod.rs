@@ -18,7 +18,7 @@ fn random_roll(num: u32) -> String{
     }
 }
 	
-fn rand() -> u32 {
+pub fn rand() -> u32 {
 	
     let since_epoch = SystemTime::now().duration_since(UNIX_EPOCH)
 	

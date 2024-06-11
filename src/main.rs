@@ -1,8 +1,8 @@
+mod r#array;
 mod random_number;
 mod r#loop;
+mod read_terminal;
 
 fn main() {
-    random_number::roll_dice();
-    r#loop::loop_func();
-    r#loop::crit_check();
+    r#array::print_enumeration();
 }

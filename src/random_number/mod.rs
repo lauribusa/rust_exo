@@ -29,3 +29,13 @@ pub fn rand() -> u32 {
     (nanos % 21) as u32
 	
 }
+
+pub fn rand_max(max: u128) -> u32 {
+    let since_epoch = SystemTime::now().duration_since(UNIX_EPOCH)
+	
+        .expect("Le temps a reculé");
+	
+    let nanos = since_epoch.as_nanos();
+	
+    (nanos % max) as u32
+}

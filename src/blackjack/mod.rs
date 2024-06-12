@@ -32,6 +32,12 @@ fn print_lose(){
     println!("___________________");
 }
 
+fn print_draw(){
+    println!("_____________");
+    println!("### DRAW. ###");
+    println!("_____________");
+}
+
 fn print_title() {
     println!(r"                                                                                            ");
     println!(r"                                                                                            ");
@@ -325,9 +331,7 @@ fn start_round(deck: &[Card]) {
 
                     if dealer_score == hand_value {
                         print_game_hands(&hand, hand_value, &dealer_hand, dealer_score);
-                        println!("_____________");
-                        println!("### DRAW. ###");
-                        println!("_____________");
+                        print_draw();
                         break;
                     }
                 }

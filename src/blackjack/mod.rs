@@ -20,25 +20,31 @@ enum Suit {
     Clubs,
 }
 
+fn print_win(){
+    println!("__________________");
+    println!("### PLAYER WIN ###");
+    println!("__________________");
+}
+
+fn print_lose(){
+    println!("___________________");
+    println!("### PLAYER LOSE ###");
+    println!("___________________");
+}
+
 fn print_title() {
-    println!(
-        r"__________.____       _____  _________  ____  __.    ____.  _____  _________  ____  __."
-    );
-    println!(
-        r"\______   \    |     /  _  \ \_   ___ \|    |/ _|   |    | /  _  \ \_   ___ \|    |/ _|"
-    );
-    println!(
-        r" |    |  _/    |    /  /_\  \/    \  \/|      <     |    |/  /_\  \/    \  \/|      <  "
-    );
-    println!(
-        r" |    |   \    |___/    |    \     \___|    |  \/\__|    /    |    \     \___|    |  \ "
-    );
-    println!(
-        r" |______  /_______ \____|__  /\______  /____|__ \________\____|__  /\______  /____|__ \"
-    );
-    println!(
-        r"        \/        \/       \/        \/        \/                \/        \/        \/"
-    );
+    println!(r"                                                                                            ");
+    println!(r"                                                                                            ");
+    println!(r"   /$$$$$$$  /$$        /$$$$$$   /$$$$$$  /$$   /$$    /$$$$$  /$$$$$$   /$$$$$$  /$$   /$$");
+    println!(r"  | $$__  $$| $$       /$$__  $$ /$$__  $$| $$  /$$/   |__  $$ /$$__  $$ /$$__  $$| $$  /$$/");
+    println!(r"  | $$  \ $$| $$      | $$  \ $$| $$  \__/| $$ /$$/       | $$| $$  \ $$| $$  \__/| $$ /$$/ ");
+    println!(r"  | $$$$$$$ | $$      | $$$$$$$$| $$      | $$$$$/        | $$| $$$$$$$$| $$      | $$$$$/  ");
+    println!(r"  | $$__  $$| $$      | $$__  $$| $$      | $$  $$   /$$  | $$| $$__  $$| $$      | $$  $$  ");
+    println!(r"  | $$  \ $$| $$      | $$  | $$| $$    $$| $$\  $$ | $$  | $$| $$  | $$| $$    $$| $$\  $$ ");
+    println!(r"  | $$$$$$$/| $$$$$$$$| $$  | $$|  $$$$$$/| $$ \  $$|  $$$$$$/| $$  | $$|  $$$$$$/| $$ \  $$");
+    println!(r"  |_______/ |________/|__/  |__/ \______/ |__/  \__/ \______/ |__/  |__/ \______/ |__/  \__/");
+    println!(r"                                                                                            ");
+    println!(r"                                                                                            ");
 }
 
 fn print_hand(hand: &Vec<&Card>) {
@@ -266,7 +272,8 @@ fn start_round(deck: &[Card]) {
             hand_value = get_hand_score(&mut hand);
             if hand_value > 21 {
                 print_hand_value(&hand, hand_value);
-                println!("Player bust with {}. DEALER WINS.", hand_value);
+                println!("Player bust with {}.", hand_value);
+                print_lose();
                 print_options();
                 break;
             }
@@ -286,7 +293,8 @@ fn start_round(deck: &[Card]) {
             dealer_score = get_hand_score(&mut dealer_hand);
             if dealer_score > 21 {
                 print_game_hands(&hand, hand_value, &dealer_hand, dealer_score);
-                println!("Dealer bust with {}. PLAYER WINS.", dealer_score);
+                println!("Dealer bust with {}.", dealer_score);
+                print_win();
                 print_options();
                 break;
             }
@@ -294,7 +302,8 @@ fn start_round(deck: &[Card]) {
             loop {
                 if dealer_score > 21 {
                     print_game_hands(&hand, hand_value, &dealer_hand, dealer_score);
-                    println!("Dealer bust with {}. PLAYER WINS.", dealer_score);
+                    println!("Dealer bust with {}.", dealer_score);
+                    print_win();
                     break;
                 } else if dealer_score < 18 {
                     let card = get_card(deck);
@@ -304,19 +313,21 @@ fn start_round(deck: &[Card]) {
                 } else {
                     if dealer_score > hand_value {
                         print_game_hands(&hand, hand_value, &dealer_hand, dealer_score);
-                        println!("DEALER WINS.");
+                        print_lose();
                         break;
                     }
 
                     if dealer_score < hand_value {
                         print_game_hands(&hand, hand_value, &dealer_hand, dealer_score);
-                        println!("PLAYER WINS.");
+                        print_win();
                         break;
                     }
 
                     if dealer_score == hand_value {
                         print_game_hands(&hand, hand_value, &dealer_hand, dealer_score);
-                        println!("DRAW.");
+                        println!("_____________");
+                        println!("### DRAW. ###");
+                        println!("_____________");
                         break;
                     }
                 }

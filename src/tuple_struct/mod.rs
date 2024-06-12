@@ -92,7 +92,7 @@ impl Character{
         Character { name, position: Vector2(0 as f64,0 as f64) }
     }
 
-    fn get_terrain_speed(terrain: Terrain) -> u8{
+    fn get_terrain_speed(&self, terrain: Terrain) -> u8{
         match terrain {
             Terrain::CONCRETE => 2 as u8,
             Terrain::GRASS => 1 as u8,
@@ -103,5 +103,5 @@ impl Character{
 
 pub fn character_creation(){
     let ch = Character::new(String::from("Barakie"));
-    println!("Speed for concrete: {}", Character::get_terrain_speed(Terrain::CONCRETE));
+    println!("Speed for concrete: {}", ch.get_terrain_speed(Terrain::CONCRETE));
 }

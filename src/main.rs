@@ -1,12 +1,16 @@
-mod r#array;
-mod random_number;
-mod r#loop;
-mod read_terminal;
-mod tuple;
-mod card_game;
-mod memory;
+// mod r#array;
+// mod random_number;
+// mod r#loop;
+// mod read_terminal;
+// mod tuple;
+// mod memory;
+// mod strings;
+mod blackjack;
 
 fn main() {
-    card_game::run_game();
+    //card_game::run_game();
     //memory::todo_list_creation();
+    //strings::print_string();
+    //strings::exo_string_2("rougegarde", "Race de Skyrim");
+    blackjack::run_game();
 }

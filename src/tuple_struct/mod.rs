@@ -73,35 +73,3 @@ pub fn create_password_and_compare(){
 
     println!("Trying to compare... {}", password.compare(&confirm_correct_password))
 }
-
-struct Character{
-    name: String,
-    position: Vector2
-}
-
-enum Terrain {
-    CONCRETE,
-    GRASS,
-    WATER
-}
-
-struct Vector2(f64, f64);
-
-impl Character{
-    fn new(name: String) -> Character {
-        Character { name, position: Vector2(0 as f64,0 as f64) }
-    }
-
-    fn get_terrain_speed(&self, terrain: Terrain) -> u8{
-        match terrain {
-            Terrain::CONCRETE => 2 as u8,
-            Terrain::GRASS => 1 as u8,
-            Terrain::WATER => 0 as u8,
-        }
-    }
-}
-
-pub fn character_creation(){
-    let ch = Character::new(String::from("Barakie"));
-    println!("Speed for concrete: {}", ch.get_terrain_speed(Terrain::CONCRETE));
-}

@@ -7,7 +7,12 @@
 // mod strings;
 // mod r#struct;
 // mod blackjack;
-mod tuple_struct;
+// mod tuple_struct;
+// mod r#enum;
+// mod options;
+mod mini_rpg;
+
+use crate::mini_rpg::player::*;
 
 fn main() {
     //card_game::run_game();
@@ -16,6 +21,12 @@ fn main() {
     //strings::exo_string_2("rougegarde", "Race de Skyrim");
     // blackjack::run_game();
     // r#struct::battle_arena();
-    tuple_struct::tuple_struct_constructor();
-    tuple_struct::create_password_and_compare();
+    // tuple_struct::tuple_struct_constructor();
+    // tuple_struct::create_password_and_compare();
+    // r#enum::create_orc_faction();
+    // options::create_user_table();
+    // options::create_options_table();
+    // imported from mini_rpg::player
+    let mm = PlayerCharacter::new("Baratus");
+
 }

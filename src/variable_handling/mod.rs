@@ -6,7 +6,6 @@ const: PASCAL_CASE
 everything else: CamelCase
 */
 
-
 pub fn print_my_stuff() {
     let a_number: i64 = 32;
     println!("Printing a i64 number: {a_number}");

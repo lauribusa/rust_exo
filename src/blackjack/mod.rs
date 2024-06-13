@@ -1,23 +1,112 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
-#[derive(PartialEq)]
-struct Card {
-    info: CardInfo,
-    suit: Suit,
-}
-
-#[derive(PartialEq)]
-struct CardInfo {
-    name: String,
-    value: u8,
-}
-
 #[derive(Copy, Clone, Debug, PartialEq)]
 enum Suit {
     Spades,
     Hearts,
     Diamonds,
     Clubs,
+}
+
+impl Suit {
+    fn get_icon(&self) -> char{
+        match &self {
+            Suit::Spades => '♠',
+            Suit::Hearts => '♡',
+            Suit::Diamonds => '♢',
+            Suit::Clubs => '♣',
+        }
+    }
+
+    fn get_name(&self) -> String {
+        match &self {
+            Suit::Spades => String::from("Spades"),
+            Suit::Hearts => String::from("Hearts"),
+            Suit::Diamonds => String::from("Diamonds"),
+            Suit::Clubs => String::from("Clubs"),
+        }
+    }
+}
+
+#[derive(PartialEq)]
+enum Rank {
+    Ace,
+    King,
+    Queen,
+    Jack,
+    Number(u8)
+}
+
+impl Rank {
+    fn get_value(&self) -> u8{
+        match &self {
+            Rank::Ace => 1 as u8,
+            Rank::King => 10 as u8,
+            Rank::Queen => 10 as u8,
+            Rank::Jack => 10 as u8,
+            Rank::Number(v) => *v,
+        }
+    }
+
+    fn get_name(&self) -> String {
+        match &self {
+            Rank::Ace => "Ace".to_string(),
+            Rank::King => "King".to_string(),
+            Rank::Queen => "Queen".to_string(),
+            Rank::Jack => "Jack".to_string(),
+            Rank::Number(num) => num.to_string(),
+        }
+    }
+
+    fn get_ace_value(&self, score: u8) -> u8 {
+        match &self {
+            Rank::Ace => {
+                if &score + 11 > 21 {
+                    1
+                } else {
+                    11
+                }
+            }
+            _ => self.get_value()
+        }
+    }
+}
+
+struct Card {
+    rank: Rank,
+    suit: Suit,
+}
+
+impl Card {
+    fn print_card(&self){
+        let me = &self;
+        println!(
+            "[ {} of {:?} ] {} ({})",
+            me.rank.get_name(), me.suit.get_name(), me.get_shorthand(), me.rank.get_value()
+        );
+    }
+
+    fn get_shorthand(&self) -> String{
+        let me = &self;
+        let suit = me.suit.get_icon();
+        let rank = &me.rank;
+        let mut shorthand = match rank {
+            Rank::Ace => String::from("A"),
+            Rank::King => String::from("K"),
+            Rank::Queen => String::from("Q"),
+            Rank::Jack => String::from("J"),
+            Rank::Number(num) => num.to_string(),
+        };
+        shorthand.push(suit);
+        shorthand
+    }
+
+    fn new(suit: Suit, rank: Rank) -> Card {
+        Card {
+            rank,
+            suit,
+        }
+    }
 }
 
 fn print_win(){
@@ -55,45 +144,13 @@ fn print_title() {
 
 fn print_hand(hand: &Vec<&Card>) {
     for card in hand {
-        let card_icon = print_card(card);
-        println!(
-            "[ {} of {:?} ] {} ({})",
-            card.info.name, card.suit, card_icon, card.info.value
-        );
+        card.print_card();
     }
 }
 
 fn print_card(card: &Card) -> String {
-    let card_name = card.info.name.as_str();
-
-    let suit = match card.suit {
-        Suit::Spades => '♠',
-        Suit::Hearts => '♡',
-        Suit::Diamonds => '♢',
-        Suit::Clubs => '♣',
-    };
-
-    let value = match card_name {
-        "Ace" => "A",
-        "Two" => "2",
-        "Three" => "3",
-        "Four" => "4",
-        "Five" => "5",
-        "Six" => "6",
-        "Seven" => "7",
-        "Eight" => "8",
-        "Nine" => "9",
-        "Ten" => "10",
-        "Jack" => "J",
-        "Queen" => "Q",
-        "King" => "K",
-        _ => "X",
-    };
-
-    let mut card_icon = "".to_string();
-    card_icon.push_str(value);
-    card_icon.push(suit);
-    card_icon
+    let card_name = card.get_shorthand();
+    card_name
 }
 
 fn print_hand_value(hand: &Vec<&Card>, hand_value: u8) {
@@ -142,11 +199,11 @@ fn read_input() -> String {
     input.trim().to_string()
 }
 
-fn build_deck() -> Vec<Card> {
+fn setup_deck() -> Vec<Card> {
     let mut new_deck = vec![];
     let suits = [Suit::Clubs, Suit::Diamonds, Suit::Hearts, Suit::Spades];
     for suit in suits.iter() {
-        let cards = create_suit_deck(suit.to_owned());
+        let cards = create_deck(suit.to_owned());
         for card in cards {
             new_deck.push(card);
         }
@@ -154,46 +211,21 @@ fn build_deck() -> Vec<Card> {
     new_deck
 }
 
-fn create_suit_deck(suit: Suit) -> Vec<Card> {
+fn create_deck(suit: Suit) -> Vec<Card> {
     let mut cards: Vec<Card> = vec![];
-    let card_values: [(&str, u8); 13] = [
-        ("Ace", 1),
-        ("Two", 2),
-        ("Three", 3),
-        ("Four", 4),
-        ("Five", 5),
-        ("Six", 6),
-        ("Seven", 7),
-        ("Eight", 8),
-        ("Nine", 9),
-        ("Ten", 10),
-        ("Jack", 10),
-        ("Queen", 10),
-        ("King", 10),
-    ];
-    for card_value in card_values {
-        let card_info = create_card_info(card_value.0, card_value.1);
-        cards.push(create_card(card_info, suit));
+    cards.push(Card::new(suit, Rank::King));
+    cards.push(Card::new(suit, Rank::Queen));
+    cards.push(Card::new(suit, Rank::Jack));
+    for i in 0..9 {
+        let val = 10 - i;
+        cards.push(Card::new(suit, Rank::Number(val)));
     }
+    cards.push(Card::new(suit, Rank::Ace));
     cards
 }
 
-fn create_card_info(name: &str, value: u8) -> CardInfo {
-    CardInfo {
-        name: name.to_string(),
-        value,
-    }
-}
-
-fn create_card(card_info: CardInfo, suit: Suit) -> Card {
-    Card {
-        info: card_info,
-        suit,
-    }
-}
-
 pub fn run_game() {
-    let deck = build_deck();
+    let deck = setup_deck();
     print_title();
     print_options();
     loop {
@@ -218,8 +250,8 @@ fn get_hand_score(hand: &mut Vec<&Card>) -> u8 {
     let mut score: u8 = 0;
     let mut owned_aces: u8 = 0;
     for card in hand {
-        let card_value = card.info.value;
-        if card_value == 1 {
+        let card_value = card.rank.get_value();
+        if card.rank == Rank::Ace {
             owned_aces += 1;
             continue;
         }

@@ -81,7 +81,7 @@ impl Card {
     fn print_card(&self){
         let me = &self;
         println!(
-            "[ {} of {:?} ] {} ({})",
+            "[ {} of {} ] {} ({})",
             me.rank.get_name(), me.suit.get_name(), me.get_shorthand(), me.rank.get_value()
         );
     }

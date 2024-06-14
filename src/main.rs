@@ -23,7 +23,10 @@
 // mod error_handling;
 // mod io;
 
-mod generics;
+// mod generics;
+
+// mod traits;
+mod lifetimes;
 
 fn main() {
     // bank();
@@ -47,5 +50,7 @@ fn main() {
     // io::write_info(String::from("Qu'attendez vous de moi?!"));
     // io::print_log_content();
 
-    generics::unique_array();
+    // generics::unique_array();
+
+    // traits::convert_currency();
 }

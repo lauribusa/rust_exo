@@ -1,0 +1,6 @@
+ERROR: PAS TOUCHE A MES OEUFS JOANNA!!
+WARN: Tu te crois malin, le poste de radio?
+INFO: Mes facultés mentales sont deux fois supérieures à ta cervelle de petit pois!
+ERROR: Ainsi vous réclamez mon aide...
+WARN: Nain paré!
+INFO: Qu'attendez vous de moi?!

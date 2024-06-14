@@ -17,13 +17,16 @@
 // mod mini_rpg;
 //use crate::mini_rpg::player::*;
 
-use bank_system::bank;
+// mod bank_system;
+// use bank_system::bank;
 
-mod error_handling;
-mod bank_system;
+// mod error_handling;
+// mod io;
+
+mod generics;
 
 fn main() {
-    bank();
+    // bank();
     // card_game::run_game();
     // memory::todo_list_creation();
     // strings::print_string();
@@ -37,5 +40,12 @@ fn main() {
     // options::create_options_table();
     // imported from mini_rpg::player
     // let mm = PlayerCharacter::new("Baratus");
-    error_handling::banking_system();
+    // error_handling::banking_system();
+
+    // io::write_err(String::from("Ainsi vous réclamez mon aide..."));
+    // io::write_warn(String::from("Nain paré!"));
+    // io::write_info(String::from("Qu'attendez vous de moi?!"));
+    // io::print_log_content();
+
+    generics::unique_array();
 }
